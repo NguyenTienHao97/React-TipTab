@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 import RichTextEditor, {
   Attachment,
@@ -6,36 +6,23 @@ import RichTextEditor, {
   Blockquote,
   Bold,
   BulletList,
-  Clear,
   Code,
   CodeBlock,
   Color,
   ColumnActionButton,
-  Emoji,
   Excalidraw,
-  ExportPdf,
-  ExportWord,
-  FontFamily,
-  FontSize,
-  FormatPainter,
   Heading,
   Highlight,
   History,
   HorizontalRule,
-  Iframe,
   Image,
-  ImageGif,
-  ImportWord,
   Indent,
   Italic,
   Katex,
-  LineHeight,
   Link,
   Mention,
-  Mermaid,
   MoreMark,
   OrderedList,
-  SearchAndReplace,
   SlashCommand,
   Strike,
   Table,
@@ -43,7 +30,6 @@ import RichTextEditor, {
   TaskList,
   TextAlign,
   TextDirection,
-  Twitter,
   Underline,
   Video,
   locale,
@@ -74,27 +60,20 @@ const extensions = [
     },
   }),
   History,
-  SearchAndReplace,
   TableOfContents,
-  FormatPainter.configure({ spacer: true }),
-  Clear,
-  FontFamily,
   Heading.configure({ spacer: true }),
-  FontSize,
   Bold,
   Italic,
   Underline,
   Strike,
   MoreMark,
   Katex,
-  Emoji,
   Color.configure({ spacer: true }),
   Highlight,
   BulletList,
   OrderedList,
   TextAlign.configure({ types: ['heading', 'paragraph'], spacer: true }),
   Indent,
-  LineHeight,
   TaskList.configure({
     spacer: true,
     taskItem: {
@@ -120,9 +99,6 @@ const extensions = [
       })
     },
   }),
-  ImageGif.configure({
-    GIPHY_API_KEY: import.meta.env.VITE_GIPHY_API_KEY as string,
-  }),
   Blockquote,
   SlashCommand,
   HorizontalRule,
@@ -132,24 +108,11 @@ const extensions = [
   CodeBlock.configure({ defaultTheme: 'dracula' }),
   ColumnActionButton,
   Table,
-  Iframe,
-  ExportPdf.configure({ spacer: true }),
-  ImportWord.configure({
-    upload: (files: File[]) => {
-      const f = files.map(file => ({
-        src: URL.createObjectURL(file),
-        alt: file.name,
-      }))
-      return Promise.resolve(f)
-    },
-  }),
-  ExportWord,
   Excalidraw,
   TextDirection,
   Mention,
   Attachment.configure({
     upload: (file: any) => {
-      // fake upload return base 64
       const reader = new FileReader()
       reader.readAsDataURL(file)
 
@@ -161,24 +124,9 @@ const extensions = [
       })
     },
   }),
-  Mermaid.configure({
-    upload: (file: any) => {
-      // fake upload return base 64
-      const reader = new FileReader()
-      reader.readAsDataURL(file)
-
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          const blob = convertBase64ToBlob(reader.result as string)
-          resolve(URL.createObjectURL(blob))
-        }, 300)
-      })
-    },
-  }),
-  Twitter,
 ]
 
-const DEFAULT = `<p dir="auto"></p><p dir="auto"></p><p dir="auto"></p><p dir="auto"><div style="text-align: center;" class="image"><img height="auto" style="transform: rotateX(0deg) rotateY(180deg);" src="https://cdn.hashnode.com/res/hashnode/image/upload/v1729198819038/684c0adb-b189-4af8-b9d8-d26e4097ce27.png?auto=compress,format&amp;format=webp" flipx="false" flipy="true" align="center" inline="false"></div></p><p dir="auto"></p><p dir="auto"></p><p dir="auto"></p>`
+const DEFAULT = ``
 
 function debounce(func: any, wait: number) {
   let timeout: NodeJS.Timeout
@@ -191,62 +139,27 @@ function debounce(func: any, wait: number) {
 
 function App() {
   const [content, setContent] = useState(DEFAULT)
-  const [theme, setTheme] = useState('light')
-  const [disable, setDisable] = useState(false)
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const onValueChange = useCallback(
     debounce((value: any) => {
       setContent(value)
     }, 300),
     [],
   )
-  return (
-    <div
-      className="p-[24px] flex flex-col w-full max-w-screen-lg gap-[24px] mx-[auto] my-0"
-      style={{
-        maxWidth: 1024,
-        margin: '40px auto',
-      }}
-    >
-      <div
-        style={{
-          display: 'flex',
-          gap: '12px',
-          marginTop: '100px',
-          marginBottom: 10,
-        }}
-      >
-        <button type="button" onClick={() => locale.setLang('vi')}>Vietnamese</button>
-        <button type="button" onClick={() => locale.setLang('en')}>English</button>
-        <button type="button" onClick={() => locale.setLang('zh_CN')}>Chinese</button>
-        <button type="button" onClick={() => locale.setLang('pt_BR')}>Português</button>
-        <button type="button" onClick={() => locale.setLang('hu_HU')}>Hungarian</button>
-        <button type="button" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
-          {theme === 'dark' ? 'Light' : 'Dark'}
-        </button>
-        <button type="button" onClick={() => setDisable(!disable)}>{disable ? 'Editable' : 'Readonly'}</button>
-      </div>
 
-      <RichTextEditor
+  useEffect(() => {
+    locale.setLang('vi')
+  }, [])
+
+  return (
+    <RichTextEditor
         output="html"
         content={content as any}
         onChangeContent={onValueChange}
         extensions={extensions}
-        dark={theme === 'dark'}
-        disabled={disable}
+        dark={false}
       />
-
-      {typeof content === 'string' && (
-        <textarea
-          style={{
-            marginTop: 20,
-            height: 500,
-          }}
-          readOnly
-          value={content}
-        />
-      )}
-    </div>
   )
 }
 

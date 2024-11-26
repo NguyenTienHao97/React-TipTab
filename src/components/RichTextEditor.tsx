@@ -156,7 +156,7 @@ function RichTextEditor(props: RichTextEditorProps, ref: React.ForwardedRef<{ ed
     }
   }, [])
 
-  const hasExtensionValue = hasExtension(editor as any, 'characterCount')
+  // const hasExtensionValue = hasExtension(editor as any, 'characterCount')
 
   if (!editor) {
     return <></>
@@ -165,17 +165,17 @@ function RichTextEditor(props: RichTextEditorProps, ref: React.ForwardedRef<{ ed
   return (
     <div className="reactjs-tiptap-editor">
       <TooltipProvider delayDuration={0} disableHoverableContent>
-        <div className="richtext-rounded-[0.5rem] richtext-bg-background richtext-shadow richtext-overflow-hidden richtext-outline richtext-outline-1">
+        <div className="richtext-overflow-hidden">
 
-          <div className="richtext-flex richtext-flex-col richtext-w-full richtext-max-h-full">
-            {!props?.hideToolbar && <Toolbar editor={editor} disabled={!!props?.disabled} />}
+          <div className="richtext-flex richtext-flex-col richtext-max-h-full">
 
             <EditorContent className={`richtext-relative ${props?.contentClass || ''}`} editor={editor} />
 
-            {hasExtensionValue && <CharactorCount editor={editor} extensions={extensions} />}
+            {/* {hasExtensionValue && <CharactorCount editor={editor} extensions={extensions} />} */}
 
             {!props?.hideBubble && <BubbleMenu bubbleMenu={props?.bubbleMenu} editor={editor} disabled={props?.disabled} />}
           </div>
+          {!props?.hideToolbar && <Toolbar editor={editor} disabled={!!props?.disabled} />}
         </div>
       </TooltipProvider>
     </div>

@@ -62,13 +62,23 @@ function Toolbar({ editor, disabled }: ToolbarProps) {
 
   return (
     <div
-      className="richtext-px-1 richtext-py-2 !richtext-border-b"
       style={{
         pointerEvents: disabled ? 'none' : 'auto',
         opacity: disabled ? 0.5 : 1,
+        position: 'absolute',
+        bottom: 100,
+        height: 50,
+        width: 400,
+        overflowX: 'scroll',
+        scrollbarWidth: 'none',
+        msOverflowX: 'hidden',
+        background: 'white',
+        display: 'flex',
+        alignItems: 'center',
+        borderRadius: 16,
       }}
     >
-      <div className="richtext-relative richtext-flex richtext-flex-wrap richtext-h-auto richtext-gap-y-1 richtext-gap-x-1">
+      <div className="richtext-flex richtext-gap-x-1">
         {items.map((item: ToolbarItemProps, key) => {
           const ButtonComponent = item.button.component
 
