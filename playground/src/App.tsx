@@ -154,12 +154,12 @@ function App() {
 
   return (
     <RichTextEditor
-        output="html"
-        content={content as any}
-        onChangeContent={onValueChange}
-        extensions={extensions}
-        dark={false}
-      />
+      output="html"
+      content={content as any}
+      onChangeContent={onValueChange}
+      extensions={extensions}
+      dark={false}
+    />
   )
 }
 
