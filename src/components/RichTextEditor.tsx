@@ -1,11 +1,9 @@
 /* eslint-disable react/no-unstable-default-props */
 import {
   forwardRef,
-  useCallback,
   useEffect,
   useImperativeHandle,
   useMemo,
-  useState,
 } from 'react'
 
 import type { AnyExtension, Editor as CoreEditor } from '@tiptap/core'
@@ -18,11 +16,9 @@ import { BubbleMenu, Toolbar, TooltipProvider } from '@/components'
 import { EDITOR_UPDATE_WATCH_THROTTLE_WAIT_TIME } from '@/constants'
 import { RESET_CSS } from '@/constants/resetCSS'
 import { themeActions } from '@/theme/theme'
-import { hasExtension } from '@/utils/utils'
 import { removeCSS, updateCSS } from '@/utils/dynamicCSS'
 
 import '../styles/index.scss'
-import CharactorCount from '@/components/CharactorCount'
 import { editableEditorActions } from '@/store/editableEditor'
 
 /**
@@ -184,9 +180,6 @@ function RichTextEditor(
               className={`richtext-relative ${props?.contentClass || ''}`}
               editor={editor}
             />
-
-            {/* {hasExtensionValue && <CharactorCount editor={editor} extensions={extensions} />} */}
-
             {!props?.hideBubble && (
               <BubbleMenu
                 bubbleMenu={props?.bubbleMenu}

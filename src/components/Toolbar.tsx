@@ -1,9 +1,10 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import React, { useMemo } from 'react'
 import type { Editor } from '@tiptap/core'
 
 import { Separator } from '@/components'
 import { useLocale } from '@/locales'
 import { isFunction } from '@/utils/utils'
+import useKeyboardVisibility from '@/hooks/useKeyboardVisibility'
 
 export interface ToolbarProps {
   editor: Editor
@@ -19,27 +20,9 @@ interface ToolbarItemProps {
   spacer: boolean
 }
 
-const elementHeight = 50
-
 function Toolbar({ editor, disabled }: ToolbarProps) {
   const { t } = useLocale()
-
-  const [isKeyboardVisible, setKeyboardVisible] = useState(false)
-  const [top, setTop] = useState(0)
-
-  const handleResize = useCallback(() => {
-    setKeyboardVisible(window.innerHeight < 500)
-    const viewportHeight = window.visualViewport?.height ?? 0
-    // math
-    setTop(viewportHeight + window.scrollY - elementHeight)
-  }, [])
-
-  useEffect(() => {
-    window.visualViewport?.addEventListener('resize', handleResize)
-    return () => {
-      window.visualViewport?.removeEventListener('resize', handleResize)
-    }
-  }, [handleResize])
+  const { isKeyboardVisible, keyboardOffset } = useKeyboardVisibility()
 
   const items = useMemo(() => {
     const extensions = [...editor.extensionManager.extensions]
@@ -78,8 +61,6 @@ function Toolbar({ editor, disabled }: ToolbarProps) {
     return menus
   }, [editor, t])
 
-  console.log('top', top)
-
   return (
     <div
       style={{
@@ -87,7 +68,7 @@ function Toolbar({ editor, disabled }: ToolbarProps) {
         opacity: disabled ? 0.5 : 1,
         position: 'absolute',
         height: 50,
-        bottom: isKeyboardVisible ? top : 100,
+        bottom: isKeyboardVisible ? keyboardOffset : 100,
         width: '100%',
         overflowX: 'scroll',
         scrollbarWidth: 'none',
@@ -96,7 +77,7 @@ function Toolbar({ editor, disabled }: ToolbarProps) {
         display: 'flex',
         alignItems: 'center',
         borderRadius: 16,
-        transform: `translateY(${top}px)`,
+        transform: `translateY(${keyboardOffset}px)`,
       }}
     >
       <div className="richtext-flex richtext-gap-x-1">
