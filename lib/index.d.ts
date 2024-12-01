@@ -1778,9 +1778,8 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        tableCellBackground: {
-            setTableCellBackground: (color: string) => ReturnType;
-            unsetTableCellBackground: () => ReturnType;
+        painter: {
+            setPainter: (marks: Mark[]) => ReturnType;
         };
     }
 }
@@ -1788,8 +1787,9 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        painter: {
-            setPainter: (marks: Mark[]) => ReturnType;
+        tableCellBackground: {
+            setTableCellBackground: (color: string) => ReturnType;
+            unsetTableCellBackground: () => ReturnType;
         };
     }
 }
@@ -1862,8 +1862,8 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        exportWord: {
-            exportToWord: () => ReturnType;
+        excalidraw: {
+            setExcalidraw: (attrs?: IExcalidrawAttrs) => ReturnType;
         };
     }
 }
@@ -1881,8 +1881,8 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        excalidraw: {
-            setExcalidraw: (attrs?: IExcalidrawAttrs) => ReturnType;
+        attachment: {
+            setAttachment: (attrs?: unknown) => ReturnType;
         };
     }
 }
@@ -1890,8 +1890,9 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        attachment: {
-            setAttachment: (attrs?: unknown) => ReturnType;
+        mermaid: {
+            setMermaid: (options: any, replace?: any) => ReturnType;
+            setAlignImageMermaid: (align: 'left' | 'center' | 'right') => ReturnType;
         };
     }
 }
@@ -1934,16 +1935,10 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        mermaid: {
-            setMermaid: (options: any, replace?: any) => ReturnType;
-            setAlignImageMermaid: (align: 'left' | 'center' | 'right') => ReturnType;
+        exportWord: {
+            exportToWord: () => ReturnType;
         };
     }
-}
-
-
-declare namespace DropdownMenuShortcut {
-    var displayName: string;
 }
 
 
@@ -1953,5 +1948,10 @@ declare namespace DialogHeader {
 
 
 declare namespace DialogFooter {
+    var displayName: string;
+}
+
+
+declare namespace DropdownMenuShortcut {
     var displayName: string;
 }

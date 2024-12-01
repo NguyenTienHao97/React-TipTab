@@ -62,9 +62,6 @@ function Toolbar({ editor, disabled }: ToolbarProps) {
     return menus
   }, [editor, t])
 
-  console.log('keyboardOffset', keyboardOffset)
-  console.log('isKeyboardVisible', isKeyboardVisible)
-
   return (
     <div
       style={{
@@ -72,7 +69,7 @@ function Toolbar({ editor, disabled }: ToolbarProps) {
         opacity: disabled ? 0.5 : 1,
         position: 'fixed',
         height: 50,
-        bottom: isKeyboardVisible ? 300 : 100,
+        bottom: isKeyboardVisible ? keyboardOffset : 100,
         width: '100%',
         overflowX: 'scroll',
         scrollbarWidth: 'none',
