@@ -63,6 +63,7 @@ function Toolbar({ editor, disabled }: ToolbarProps) {
   }, [editor, t])
 
   console.log('keyboardOffset', keyboardOffset)
+  console.log('isKeyboardVisible', isKeyboardVisible)
 
   return (
     <div
@@ -80,7 +81,6 @@ function Toolbar({ editor, disabled }: ToolbarProps) {
         display: 'flex',
         alignItems: 'center',
         borderRadius: 16,
-        transform: `translateY(${keyboardOffset}px)`,
       }}
     >
       <div className="richtext-flex richtext-gap-x-1">
