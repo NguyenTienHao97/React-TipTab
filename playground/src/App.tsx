@@ -145,7 +145,7 @@ function App() {
     debounce((value: any) => {
       setContent(value)
     }, 300),
-    [],
+    [debounce],
   )
 
   useEffect(() => {

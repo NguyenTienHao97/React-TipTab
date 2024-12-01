@@ -1,5 +1,12 @@
 /* eslint-disable react/no-unstable-default-props */
-import { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useState } from 'react'
+import {
+  forwardRef,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useMemo,
+  useState,
+} from 'react'
 
 import type { AnyExtension, Editor as CoreEditor } from '@tiptap/core'
 import type { UseEditorOptions } from '@tiptap/react'
@@ -67,7 +74,10 @@ export interface RichTextEditorProps {
   resetCSS?: boolean
 }
 
-function RichTextEditor(props: RichTextEditorProps, ref: React.ForwardedRef<{ editor: CoreEditor | null }>) {
+function RichTextEditor(
+  props: RichTextEditorProps,
+  ref: React.ForwardedRef<{ editor: CoreEditor | null }>,
+) {
   const { content, extensions, useEditorOptions = {} } = props
 
   const sortExtensions = useMemo(() => {
@@ -124,7 +134,10 @@ function RichTextEditor(props: RichTextEditorProps, ref: React.ForwardedRef<{ ed
     }
   }, [props?.resetCSS])
 
-  function getOutput(editor: CoreEditor, output: RichTextEditorProps['output']) {
+  function getOutput(
+    editor: CoreEditor,
+    output: RichTextEditorProps['output'],
+  ) {
     if (props?.removeDefaultWrapper) {
       if (output === 'html') {
         return editor.isEmpty ? '' : editor.getHTML()
@@ -163,19 +176,35 @@ function RichTextEditor(props: RichTextEditorProps, ref: React.ForwardedRef<{ ed
   }
 
   return (
-    <div style={{ background: '#E1ECFE' }} className="reactjs-tiptap-editor">
+    <div
+      style={{ backgroundColor: '#E1ECFE' }}
+      className="reactjs-tiptap-editor"
+    >
       <TooltipProvider delayDuration={0} disableHoverableContent>
         <div className="richtext-overflow-hidden">
-
-          <div className="richtext-flex richtext-flex-col richtext-max-h-full">
-
-            <EditorContent className={`richtext-relative ${props?.contentClass || ''}`} editor={editor} />
+          <div
+            style={{ backgroundColor: '#E1ECFE' }}
+            className="richtext-flex richtext-flex-col richtext-max-h-full"
+          >
+            <EditorContent
+              style={{ backgroundColor: '#E1ECFE' }}
+              className={`richtext-relative ${props?.contentClass || ''}`}
+              editor={editor}
+            />
 
             {/* {hasExtensionValue && <CharactorCount editor={editor} extensions={extensions} />} */}
 
-            {!props?.hideBubble && <BubbleMenu bubbleMenu={props?.bubbleMenu} editor={editor} disabled={props?.disabled} />}
+            {!props?.hideBubble && (
+              <BubbleMenu
+                bubbleMenu={props?.bubbleMenu}
+                editor={editor}
+                disabled={props?.disabled}
+              />
+            )}
           </div>
-          {!props?.hideToolbar && <Toolbar editor={editor} disabled={!!props?.disabled} />}
+          {!props?.hideToolbar && (
+            <Toolbar editor={editor} disabled={!!props?.disabled} />
+          )}
         </div>
       </TooltipProvider>
     </div>
