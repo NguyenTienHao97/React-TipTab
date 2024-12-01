@@ -176,18 +176,11 @@ function RichTextEditor(
   }
 
   return (
-    <div
-      style={{ backgroundColor: '#E1ECFE' }}
-      className="reactjs-tiptap-editor"
-    >
+    <div className="reactjs-tiptap-editor">
       <TooltipProvider delayDuration={0} disableHoverableContent>
         <div className="richtext-overflow-hidden">
-          <div
-            style={{ backgroundColor: '#E1ECFE' }}
-            className="richtext-flex richtext-flex-col richtext-max-h-full"
-          >
+          <div className="richtext-flex richtext-flex-col richtext-max-h-full">
             <EditorContent
-              style={{ backgroundColor: '#E1ECFE' }}
               className={`richtext-relative ${props?.contentClass || ''}`}
               editor={editor}
             />
@@ -202,10 +195,10 @@ function RichTextEditor(
               />
             )}
           </div>
-          {!props?.hideToolbar && (
-            <Toolbar editor={editor} disabled={!!props?.disabled} />
-          )}
         </div>
+        {!props?.hideToolbar && (
+          <Toolbar editor={editor} disabled={!!props?.disabled} />
+        )}
       </TooltipProvider>
     </div>
   )

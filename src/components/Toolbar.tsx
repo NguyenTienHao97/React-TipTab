@@ -24,11 +24,11 @@ const elementHeight = 50
 function Toolbar({ editor, disabled }: ToolbarProps) {
   const { t } = useLocale()
 
-  // const [isKeyboardVisible, setKeyboardVisible] = useState(false)
+  const [isKeyboardVisible, setKeyboardVisible] = useState(false)
   const [top, setTop] = useState(0)
 
   const handleResize = useCallback(() => {
-    // setKeyboardVisible(window.innerHeight < 500)
+    setKeyboardVisible(window.innerHeight < 500)
     const viewportHeight = window.visualViewport?.height ?? 0
     // math
     setTop(viewportHeight + window.scrollY - elementHeight)
@@ -86,9 +86,9 @@ function Toolbar({ editor, disabled }: ToolbarProps) {
       style={{
         pointerEvents: disabled ? 'none' : 'auto',
         opacity: disabled ? 0.5 : 1,
-        position: 'fixed',
+        position: 'absolute',
         height: 50,
-        // bottom: isKeyboardVisible ? top : 100,
+        bottom: isKeyboardVisible ? top : 100,
         width: '100%',
         overflowX: 'scroll',
         scrollbarWidth: 'none',

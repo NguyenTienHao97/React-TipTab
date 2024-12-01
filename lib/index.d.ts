@@ -1778,25 +1778,6 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        tableCellBackground: {
-            setTableCellBackground: (color: string) => ReturnType;
-            unsetTableCellBackground: () => ReturnType;
-        };
-    }
-}
-
-
-declare module '@tiptap/core' {
-    interface Commands<ReturnType> {
-        exportWord: {
-            exportToWord: () => ReturnType;
-        };
-    }
-}
-
-
-declare module '@tiptap/core' {
-    interface Commands<ReturnType> {
         iframe: {
             /**
              * Add an iframe
@@ -1812,31 +1793,9 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        columns: {
-            insertColumns: (attrs?: {
-                cols: number;
-            }) => ReturnType;
-            addColBefore: () => ReturnType;
-            addColAfter: () => ReturnType;
-            deleteCol: () => ReturnType;
-        };
-    }
-}
-
-
-declare module '@tiptap/core' {
-    interface Commands<ReturnType> {
-        painter: {
-            setPainter: (marks: Mark[]) => ReturnType;
-        };
-    }
-}
-
-
-declare module '@tiptap/core' {
-    interface Commands<ReturnType> {
-        katex: {
-            setKatex: (arg?: IKatexAttrs) => ReturnType;
+        tableCellBackground: {
+            setTableCellBackground: (color: string) => ReturnType;
+            unsetTableCellBackground: () => ReturnType;
         };
     }
 }
@@ -1859,8 +1818,41 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        excalidraw: {
-            setExcalidraw: (attrs?: IExcalidrawAttrs) => ReturnType;
+        columns: {
+            insertColumns: (attrs?: {
+                cols: number;
+            }) => ReturnType;
+            addColBefore: () => ReturnType;
+            addColAfter: () => ReturnType;
+            deleteCol: () => ReturnType;
+        };
+    }
+}
+
+
+declare module '@tiptap/core' {
+    interface Commands<ReturnType> {
+        tableOfContents: {
+            setTableOfContents: () => ReturnType;
+            removeTableOfContents: () => ReturnType;
+        };
+    }
+}
+
+
+declare module '@tiptap/core' {
+    interface Commands<ReturnType> {
+        katex: {
+            setKatex: (arg?: IKatexAttrs) => ReturnType;
+        };
+    }
+}
+
+
+declare module '@tiptap/core' {
+    interface Commands<ReturnType> {
+        exportWord: {
+            exportToWord: () => ReturnType;
         };
     }
 }
@@ -1880,9 +1872,17 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        tableOfContents: {
-            setTableOfContents: () => ReturnType;
-            removeTableOfContents: () => ReturnType;
+        painter: {
+            setPainter: (marks: Mark[]) => ReturnType;
+        };
+    }
+}
+
+
+declare module '@tiptap/core' {
+    interface Commands<ReturnType> {
+        excalidraw: {
+            setExcalidraw: (attrs?: IExcalidrawAttrs) => ReturnType;
         };
     }
 }
