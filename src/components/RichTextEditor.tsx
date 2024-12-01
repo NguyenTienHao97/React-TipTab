@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unstable-default-props */
-import { forwardRef, useEffect, useImperativeHandle, useMemo } from 'react'
+import { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useState } from 'react'
 
 import type { AnyExtension, Editor as CoreEditor } from '@tiptap/core'
 import type { UseEditorOptions } from '@tiptap/react'
@@ -163,7 +163,7 @@ function RichTextEditor(props: RichTextEditorProps, ref: React.ForwardedRef<{ ed
   }
 
   return (
-    <div className="reactjs-tiptap-editor">
+    <div style={{ background: '#E1ECFE' }} className="reactjs-tiptap-editor">
       <TooltipProvider delayDuration={0} disableHoverableContent>
         <div className="richtext-overflow-hidden">
 

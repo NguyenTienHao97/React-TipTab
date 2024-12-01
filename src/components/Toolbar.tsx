@@ -1,5 +1,4 @@
-/* eslint-disable react/no-duplicate-key */
-import React, { useMemo } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import type { Editor } from '@tiptap/core'
 
 import { Separator } from '@/components'
@@ -20,8 +19,32 @@ interface ToolbarItemProps {
   spacer: boolean
 }
 
+const elementHeight = 50
+
 function Toolbar({ editor, disabled }: ToolbarProps) {
-  const { t, lang } = useLocale()
+  const { t } = useLocale()
+
+  const [isKeyboardVisible, setKeyboardVisible] = useState(false)
+  const [top, setTop] = useState(0)
+
+  const handleResize = useCallback(() => {
+    setKeyboardVisible(window.innerHeight < 500)
+    const viewportHeight = window.visualViewport?.height ?? 0
+    // math
+    setTop(viewportHeight + window.scrollY - elementHeight)
+  }, [])
+
+  useEffect(() => {
+    window.visualViewport?.addEventListener('resize', handleResize)
+    window.visualViewport?.addEventListener('scroll', handleResize)
+    window?.addEventListener('touchmove', handleResize)
+    handleResize()
+    return () => {
+      window.visualViewport?.removeEventListener('resize', handleResize)
+      window.visualViewport?.removeEventListener('scroll', handleResize)
+      window?.removeEventListener('touchmove', handleResize)
+    }
+  }, [handleResize])
 
   const items = useMemo(() => {
     const extensions = [...editor.extensionManager.extensions]
@@ -58,17 +81,17 @@ function Toolbar({ editor, disabled }: ToolbarProps) {
       menus.push({ button: _button, divider, spacer })
     }
     return menus
-  }, [editor, t, lang])
+  }, [editor, t])
 
   return (
     <div
       style={{
         pointerEvents: disabled ? 'none' : 'auto',
         opacity: disabled ? 0.5 : 1,
-        position: 'absolute',
-        bottom: 100,
+        position: 'fixed',
         height: 50,
-        width: 400,
+        bottom: isKeyboardVisible ? top : 100,
+        width: '100%',
         overflowX: 'scroll',
         scrollbarWidth: 'none',
         msOverflowX: 'hidden',
