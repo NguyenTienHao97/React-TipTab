@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useMemo } from 'react'
 import type { Editor } from '@tiptap/core'
 
@@ -61,14 +62,16 @@ function Toolbar({ editor, disabled }: ToolbarProps) {
     return menus
   }, [editor, t])
 
+  console.log('keyboardOffset', keyboardOffset)
+
   return (
     <div
       style={{
         pointerEvents: disabled ? 'none' : 'auto',
         opacity: disabled ? 0.5 : 1,
-        position: 'absolute',
+        position: 'fixed',
         height: 50,
-        bottom: isKeyboardVisible ? keyboardOffset : 100,
+        bottom: isKeyboardVisible ? 300 : 100,
         width: '100%',
         overflowX: 'scroll',
         scrollbarWidth: 'none',
