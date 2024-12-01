@@ -172,7 +172,7 @@ function RichTextEditor(
   }
 
   return (
-    <div className="reactjs-tiptap-editor">
+    <div style={{ background: '#E1ECFE' }} className="reactjs-tiptap-editor">
       <TooltipProvider delayDuration={0} disableHoverableContent>
         <div className="richtext-overflow-hidden">
           <div className="richtext-flex richtext-flex-col richtext-max-h-full">

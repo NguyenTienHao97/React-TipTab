@@ -144,6 +144,9 @@ function App() {
   const onValueChange = useCallback(
     debounce((value: any) => {
       setContent(value)
+      if (window?.ReactNativeWebView) {
+        window?.ReactNativeWebView.postMessage(JSON.stringify({ data: value }))
+      }
     }, 300),
     [debounce],
   )
@@ -153,13 +156,15 @@ function App() {
   }, [])
 
   return (
-    <RichTextEditor
-      output="html"
-      content={content as any}
-      onChangeContent={onValueChange}
-      extensions={extensions}
-      dark={false}
-    />
+    <div style={{ background: '#E1ECFE', height: '100vh' }}>
+      <RichTextEditor
+        output="html"
+        content={content as any}
+        onChangeContent={onValueChange}
+        extensions={extensions}
+        dark={false}
+      />
+    </div>
   )
 }
 
