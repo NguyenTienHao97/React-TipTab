@@ -5,7 +5,7 @@ import type { GetReferenceClientRect } from 'tippy.js'
 import { sticky } from 'tippy.js'
 
 import { ActionButton, Separator } from '@/components'
-import HighlightActionButton from '@/extensions/Highlight/components/HighlightActionButton'
+// import HighlightActionButton from '@/extensions/Highlight/components/HighlightActionButton'
 import { useLocale } from '@/locales'
 
 export interface TableBubbleMenuProps {
@@ -42,19 +42,19 @@ function TableBubbleMenu({ editor, disabled }: TableBubbleMenuProps) {
     editor.chain().focus().deleteRow().run()
   }
 
-  function onMergeCell() {
-    editor.chain().focus().mergeCells().run()
-  }
-  function onSplitCell() {
-    editor?.chain().focus().splitCell().run()
-  }
+  // function onMergeCell() {
+  //   editor.chain().focus().mergeCells().run()
+  // }
+  // function onSplitCell() {
+  //   editor?.chain().focus().splitCell().run()
+  // }
   function onDeleteTable() {
     editor.chain().focus().deleteTable().run()
   }
 
-  function onSetCellBackground(color: string) {
-    editor.chain().focus().setTableCellBackground(color).run()
-  }
+  // function onSetCellBackground(color: string) {
+  //   editor.chain().focus().setTableCellBackground(color).run()
+  // }
   const getReferenceClientRect: GetReferenceClientRect = () => {
     const {
       view,
