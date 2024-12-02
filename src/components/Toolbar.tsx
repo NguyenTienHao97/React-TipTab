@@ -23,7 +23,7 @@ interface ToolbarItemProps {
 
 function Toolbar({ editor, disabled }: ToolbarProps) {
   const { t } = useLocale()
-  const { isKeyboardVisible, keyboardOffset } = useKeyboardVisibility()
+  const { isKeyboardVisible } = useKeyboardVisibility()
 
   const items = useMemo(() => {
     const extensions = [...editor.extensionManager.extensions]
@@ -69,7 +69,7 @@ function Toolbar({ editor, disabled }: ToolbarProps) {
         opacity: disabled ? 0.5 : 1,
         position: 'fixed',
         height: 50,
-        bottom: isKeyboardVisible ? keyboardOffset : 100,
+        bottom: isKeyboardVisible ? 0 : 0,
         width: '100%',
         overflowX: 'scroll',
         scrollbarWidth: 'none',
