@@ -162,6 +162,11 @@ function App() {
         content={content as any}
         onChangeContent={onValueChange}
         extensions={extensions}
+        bubbleMenu={{
+          floatingMenuConfig: {
+            hidden: true,
+          },
+        }}
         dark={false}
       />
     </div>

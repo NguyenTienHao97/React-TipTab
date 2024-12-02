@@ -69,7 +69,7 @@ function Toolbar({ editor, disabled }: ToolbarProps) {
         opacity: disabled ? 0.5 : 1,
         position: 'fixed',
         height: 50,
-        bottom: isKeyboardVisible ? 0 : 50,
+        bottom: isKeyboardVisible ? 0 : 0,
         width: '100%',
         overflowX: 'scroll',
         scrollbarWidth: 'none',
