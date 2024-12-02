@@ -69,15 +69,14 @@ function Toolbar({ editor, disabled }: ToolbarProps) {
         opacity: disabled ? 0.5 : 1,
         position: 'fixed',
         height: 50,
-        bottom: isKeyboardVisible ? 0 : 0,
+        bottom: isKeyboardVisible ? 0 : 50,
         width: '100%',
         overflowX: 'scroll',
         scrollbarWidth: 'none',
         msOverflowX: 'hidden',
-        background: 'white',
+        background: '#F6F6F8',
         display: 'flex',
         alignItems: 'center',
-        borderRadius: 16,
       }}
     >
       <div className="richtext-flex richtext-gap-x-1">
