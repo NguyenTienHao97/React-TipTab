@@ -189,6 +189,7 @@ function RichTextEditor(
             )}
           </div>
         </div>
+        <div style={{ height: 60 }}></div>
         {!props?.hideToolbar && (
           <Toolbar editor={editor} disabled={!!props?.disabled} />
         )}

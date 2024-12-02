@@ -168,6 +168,7 @@ function App() {
           },
         }}
         dark={false}
+        hideToolbar={false}
       />
     </div>
   )

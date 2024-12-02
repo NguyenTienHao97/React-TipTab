@@ -92,7 +92,7 @@ function TableBubbleMenu({ editor, disabled }: TableBubbleMenuProps) {
         getReferenceClientRect,
         plugins: [sticky],
         sticky: 'popper',
-        placement: 'bottom-start',
+        placement: 'auto',
         offset: [-2, 16],
         zIndex: 5550,
         appendTo: 'parent',

@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React, { useMemo } from 'react'
 import type { Editor } from '@tiptap/core'
 
@@ -24,7 +23,7 @@ interface ToolbarItemProps {
 function Toolbar({ editor, disabled }: ToolbarProps) {
   const { t } = useLocale()
   const { isKeyboardVisible } = useKeyboardVisibility()
-  const itemToolBars = useMemo(() => ['Undo2', 'Redo2', 'Bold', 'Italic', 'Type', 'KatexIcon', 'List', 'ListOrdered', 'Code2', 'Attachment'], [])
+  const itemToolBars = useMemo(() => ['Undo2', 'Redo2', 'Bold', 'Italic', 'Type', 'KatexIcon', 'List', 'ListOrdered', 'Code2', 'Attachment', 'ImageUp', 'Video'], [])
 
   const items = useMemo(() => {
     const extensions = [...editor.extensionManager.extensions]
@@ -80,25 +79,27 @@ function Toolbar({ editor, disabled }: ToolbarProps) {
         background: '#F6F6F8',
         display: 'flex',
         alignItems: 'center',
-        zIndex: 9999999999,
       }}
     >
       <div className="richtext-flex richtext-gap-x-1">
         {newItems.map((item: ToolbarItemProps, key) => {
-          const ButtonComponent = item.button.component
+          if (itemToolBars.includes(item.button.componentProps?.icon)) {
+            const ButtonComponent = item.button.component
 
-          return (
-            <div className="richtext-flex richtext-items-center" key={`toolbar-item-${key}`}>
-              {item?.spacer && <Separator orientation="vertical" className="!richtext-h-[16px] !richtext-mx-[10px]" />}
+            return (
+              <div className="richtext-flex richtext-items-center" key={`toolbar-item-${key}`}>
+                {item?.spacer && <Separator orientation="vertical" className="!richtext-h-[16px] !richtext-mx-[10px]" />}
 
-              <ButtonComponent
-                {...item.button.componentProps}
-                disabled={disabled || item?.button?.componentProps?.disabled}
-              />
+                <ButtonComponent
+                  {...item.button.componentProps}
+                  disabled={disabled || item?.button?.componentProps?.disabled}
+                />
 
-              {item?.divider && <Separator orientation="vertical" className="!richtext-h-auto !richtext-mx-2" />}
-            </div>
-          )
+                {item?.divider && <Separator orientation="vertical" className="!richtext-h-auto !richtext-mx-2" />}
+              </div>
+            )
+          }
+          return <React.Fragment key={`toolbar-item-${key}`}></React.Fragment>
         })}
       </div>
     </div>
