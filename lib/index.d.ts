@@ -1732,33 +1732,25 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
+        indent: {
+            /**
+             * Set the indent attribute
+             */
+            indent: () => ReturnType;
+            /**
+             * Set the outdent attribute
+             */
+            outdent: () => ReturnType;
+        };
+    }
+}
+
+
+declare module '@tiptap/core' {
+    interface Commands<ReturnType> {
         lineHeight: {
             setLineHeight: (lineHeight: string) => ReturnType;
             unsetLineHeight: () => ReturnType;
-        };
-    }
-}
-
-
-declare module '@tiptap/core' {
-    interface Commands<ReturnType> {
-        columns: {
-            insertColumns: (attrs?: {
-                cols: number;
-            }) => ReturnType;
-            addColBefore: () => ReturnType;
-            addColAfter: () => ReturnType;
-            deleteCol: () => ReturnType;
-        };
-    }
-}
-
-
-declare module '@tiptap/core' {
-    interface Commands<ReturnType> {
-        tableOfContents: {
-            setTableOfContents: () => ReturnType;
-            removeTableOfContents: () => ReturnType;
         };
     }
 }
@@ -1786,31 +1778,6 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        indent: {
-            /**
-             * Set the indent attribute
-             */
-            indent: () => ReturnType;
-            /**
-             * Set the outdent attribute
-             */
-            outdent: () => ReturnType;
-        };
-    }
-}
-
-
-declare module '@tiptap/core' {
-    interface Commands<ReturnType> {
-        exportWord: {
-            exportToWord: () => ReturnType;
-        };
-    }
-}
-
-
-declare module '@tiptap/core' {
-    interface Commands<ReturnType> {
         search: {
             setSearchTerm: (searchTerm: string) => ReturnType;
             setReplaceTerm: (replaceTerm: string) => ReturnType;
@@ -1826,11 +1793,9 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        emoji: {
-            setEmoji: (emoji: {
-                name: string;
-                emoji: string;
-            }) => ReturnType;
+        tableOfContents: {
+            setTableOfContents: () => ReturnType;
+            removeTableOfContents: () => ReturnType;
         };
     }
 }
@@ -1838,8 +1803,8 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        painter: {
-            setPainter: (marks: Mark[]) => ReturnType;
+        exportWord: {
+            exportToWord: () => ReturnType;
         };
     }
 }
@@ -1872,15 +1837,6 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        excalidraw: {
-            setExcalidraw: (attrs?: IExcalidrawAttrs) => ReturnType;
-        };
-    }
-}
-
-
-declare module '@tiptap/core' {
-    interface Commands<ReturnType> {
         katex: {
             setKatex: (arg?: IKatexAttrs) => ReturnType;
         };
@@ -1890,9 +1846,52 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        mermaid: {
-            setMermaid: (options: any, replace?: any) => ReturnType;
-            setAlignImageMermaid: (align: 'left' | 'center' | 'right') => ReturnType;
+        columns: {
+            insertColumns: (attrs?: {
+                cols: number;
+            }) => ReturnType;
+            addColBefore: () => ReturnType;
+            addColAfter: () => ReturnType;
+            deleteCol: () => ReturnType;
+        };
+    }
+}
+
+
+declare module '@tiptap/core' {
+    interface Commands<ReturnType> {
+        painter: {
+            setPainter: (marks: Mark[]) => ReturnType;
+        };
+    }
+}
+
+
+declare module '@tiptap/core' {
+    interface Commands<ReturnType> {
+        attachment: {
+            setAttachment: (attrs?: unknown) => ReturnType;
+        };
+    }
+}
+
+
+declare module '@tiptap/core' {
+    interface Commands<ReturnType> {
+        excalidraw: {
+            setExcalidraw: (attrs?: IExcalidrawAttrs) => ReturnType;
+        };
+    }
+}
+
+
+declare module '@tiptap/core' {
+    interface Commands<ReturnType> {
+        emoji: {
+            setEmoji: (emoji: {
+                name: string;
+                emoji: string;
+            }) => ReturnType;
         };
     }
 }
@@ -1920,8 +1919,9 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        attachment: {
-            setAttachment: (attrs?: unknown) => ReturnType;
+        mermaid: {
+            setMermaid: (options: any, replace?: any) => ReturnType;
+            setAlignImageMermaid: (align: 'left' | 'center' | 'right') => ReturnType;
         };
     }
 }
@@ -1942,16 +1942,16 @@ declare module '@tiptap/core' {
 }
 
 
+declare namespace DropdownMenuShortcut {
+    var displayName: string;
+}
+
+
 declare namespace DialogHeader {
     var displayName: string;
 }
 
 
 declare namespace DialogFooter {
-    var displayName: string;
-}
-
-
-declare namespace DropdownMenuShortcut {
     var displayName: string;
 }

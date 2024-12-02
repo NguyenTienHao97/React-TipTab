@@ -24,6 +24,7 @@ interface ToolbarItemProps {
 function Toolbar({ editor, disabled }: ToolbarProps) {
   const { t } = useLocale()
   const { isKeyboardVisible } = useKeyboardVisibility()
+  const itemToolBars = useMemo(() => ['Undo2', 'Redo2', 'Bold', 'Italic', 'Type', 'KatexIcon', 'List', 'ListOrdered', 'Code2', 'Attachment'], [])
 
   const items = useMemo(() => {
     const extensions = [...editor.extensionManager.extensions]
@@ -62,6 +63,8 @@ function Toolbar({ editor, disabled }: ToolbarProps) {
     return menus
   }, [editor, t])
 
+  const newItems: ToolbarItemProps[] = useMemo(() => items.filter(item => itemToolBars.includes(item.button.componentProps?.icon)), [items, itemToolBars])
+
   return (
     <div
       style={{
@@ -77,10 +80,11 @@ function Toolbar({ editor, disabled }: ToolbarProps) {
         background: '#F6F6F8',
         display: 'flex',
         alignItems: 'center',
+        zIndex: 9999999999,
       }}
     >
       <div className="richtext-flex richtext-gap-x-1">
-        {items.map((item: ToolbarItemProps, key) => {
+        {newItems.map((item: ToolbarItemProps, key) => {
           const ButtonComponent = item.button.component
 
           return (

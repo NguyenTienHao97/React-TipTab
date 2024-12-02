@@ -85,21 +85,24 @@ function TableBubbleMenu({ editor, disabled }: TableBubbleMenuProps) {
       shouldShow={shouldShow}
       updateDelay={0}
       tippyOptions={{
-        offset: [0, 8],
+        // offset: [0, 8],
         popperOptions: {
           modifiers: [{ name: 'flip', enabled: false }],
         },
-        maxWidth: 'auto',
         getReferenceClientRect,
         plugins: [sticky],
         sticky: 'popper',
+        placement: 'bottom-start',
+        offset: [-2, 16],
+        zIndex: 5550,
+        appendTo: 'parent',
       }}
     >
       {
         disabled
           ? <></>
           : (
-              <div className="richtext-min-w-32 richtext-flex richtext-flex-row richtext-h-full richtext-items-center richtext-leading-none richtext-gap-0.5 richtext-p-2 richtext-w-full richtext-bg-background richtext-rounded-lg richtext-shadow-sm !richtext-border richtext-border-border">
+              <div style={{ width: 300, overflowX: 'auto' }} className="richtext-flex richtext-flex-row richtext-h-full richtext-items-center richtext-leading-none richtext-gap-0.5 richtext-p-2 richtext-bg-background richtext-rounded-lg richtext-shadow-sm !richtext-border richtext-border-border">
                 <ActionButton
                   icon="BetweenHorizonalEnd"
                   tooltip={t('editor.table.menu.insertColumnBefore')}
@@ -158,7 +161,7 @@ function TableBubbleMenu({ editor, disabled }: TableBubbleMenuProps) {
                   disabled={!editor?.can()?.deleteRow?.()}
                 />
                 <Separator orientation="vertical" className="!richtext-mx-1 !richtext-my-2 !richtext-h-[16px]" />
-                <ActionButton
+                {/* <ActionButton
                   icon="TableCellsMerge"
                   action={onMergeCell}
                   tooltip={t('editor.table.menu.mergeCells')}
@@ -185,7 +188,7 @@ function TableBubbleMenu({ editor, disabled }: TableBubbleMenuProps) {
                   tooltipOptions={{
                     sideOffset: 15,
                   }}
-                />
+                /> */}
                 <ActionButton
                   icon="Trash2"
                   tooltip={t('editor.table.menu.deleteTable')}

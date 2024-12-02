@@ -189,10 +189,18 @@ function ContentMenu(props: ContentMenuProps) {
       }
       style={{
         opacity: props?.disabled ? 0 : 1,
+        width: 300,
+        overflowX: 'auto',
       }}
       ref={dragElement}
     >
-      <div className="richtext-flex richtext-items-center richtext-gap-0.5 [transition-property:top,_left] richtext-ease-in-out richtext-duration-200">
+      <div
+        style={{
+          width: 300,
+          overflowX: 'auto',
+        }}
+        className="richtext-flex richtext-items-center richtext-gap-0.5 [transition-property:top,_left] richtext-ease-in-out richtext-duration-200"
+      >
         <Button
           variant="ghost"
           size="icon"
