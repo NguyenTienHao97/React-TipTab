@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable react/no-unstable-default-props */
 /* eslint-disable unused-imports/no-unused-vars */
 import React from 'react'
@@ -73,7 +74,16 @@ const ActionButton = React.forwardRef<HTMLButtonElement, Partial<ActionButtonPro
             className={cn('richtext-w-[32px] richtext-h-[32px]', customClass)}
             // pressed={isActive?.() || false}
             disabled={disabled}
-            onClick={action}
+            onClick={(e) => {
+              action?.()
+              console.log('action-title', props?.title)
+              e.preventDefault()
+              e.stopPropagation()
+            }}
+            onMouseDown={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+            }}
             data-state={isActive?.() ? 'on' : 'off'}
             {...rest}
           >
