@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable react/no-unstable-default-props */
 import {
   forwardRef,
@@ -98,9 +99,10 @@ function RichTextEditor(
     extensions: sortExtensions,
     content,
     onUpdate: ({ editor }) => {
+      console.log('edtiorxxxx', editor)
       if ('virtualKeyboard' in navigator) {
         if (navigator?.virtualKeyboard) {
-          navigator?.virtualKeyboard.hide()
+          navigator?.virtualKeyboard.show()
         }
       }
       if (onValueChange)
