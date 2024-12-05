@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useCallback, useMemo } from 'react'
 import type { Editor } from '@tiptap/core'
 
@@ -37,6 +38,21 @@ function Toolbar({ editor, disabled }: ToolbarProps) {
       'Attachment',
       'ImageUp',
       'Video',
+    ],
+    [],
+  )
+
+  const disableToolBars = useMemo(
+    () => [
+      'Undo2',
+      'Redo2',
+      'Bold',
+      'Italic',
+      'Type',
+      'KatexIcon',
+      'List',
+      'ListOrdered',
+      'Code2',
     ],
     [],
   )
@@ -92,15 +108,13 @@ function Toolbar({ editor, disabled }: ToolbarProps) {
     [items, itemToolBars],
   )
 
-  const handleToolbarClick = useCallback(() => {
-    // e.preventDefault()
-    // e.stopPropagation()
+  const handleToolbarClick = useCallback((e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
   }, [])
 
   return (
     <div
-      onMouseDown={handleToolbarClick}
-      onClick={handleToolbarClick}
       style={{
         pointerEvents: disabled ? 'none' : 'auto',
         opacity: disabled ? 0.5 : 1,
@@ -116,19 +130,32 @@ function Toolbar({ editor, disabled }: ToolbarProps) {
         alignItems: 'center',
       }}
     >
-      <div
-        onMouseDown={handleToolbarClick}
-        onClick={handleToolbarClick}
-        className="richtext-flex richtext-gap-x-1"
-      >
+      <div className="richtext-flex richtext-gap-x-1">
         {newItems.map((item: ToolbarItemProps, key) => {
           if (itemToolBars.includes(item.button.componentProps?.icon)) {
             const ButtonComponent = item.button.component
 
+            console.log(
+              'item.button.componentProps?.icon',
+              item.button.componentProps?.icon,
+            )
+
             return (
               <div
-                onClick={handleToolbarClick}
-                onMouseDown={handleToolbarClick}
+                onClick={(e) => {
+                  if (
+                    disableToolBars.includes(item.button.componentProps?.icon)
+                  ) {
+                    handleToolbarClick(e)
+                  }
+                }}
+                onMouseDown={(e) => {
+                  if (
+                    disableToolBars.includes(item.button.componentProps?.icon)
+                  ) {
+                    handleToolbarClick(e)
+                  }
+                }}
                 className="richtext-flex richtext-items-center"
                 key={`toolbar-item-${key}`}
               >

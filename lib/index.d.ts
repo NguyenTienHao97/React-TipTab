@@ -1732,6 +1732,16 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
+        lineHeight: {
+            setLineHeight: (lineHeight: string) => ReturnType;
+            unsetLineHeight: () => ReturnType;
+        };
+    }
+}
+
+
+declare module '@tiptap/core' {
+    interface Commands<ReturnType> {
         indent: {
             /**
              * Set the indent attribute
@@ -1741,16 +1751,6 @@ declare module '@tiptap/core' {
              * Set the outdent attribute
              */
             outdent: () => ReturnType;
-        };
-    }
-}
-
-
-declare module '@tiptap/core' {
-    interface Commands<ReturnType> {
-        lineHeight: {
-            setLineHeight: (lineHeight: string) => ReturnType;
-            unsetLineHeight: () => ReturnType;
         };
     }
 }
@@ -1778,21 +1778,6 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        iframe: {
-            /**
-             * Add an iframe
-             */
-            setIframe: (options: {
-                src: string;
-                service: string;
-            }) => ReturnType;
-        };
-    }
-}
-
-
-declare module '@tiptap/core' {
-    interface Commands<ReturnType> {
         painter: {
             setPainter: (marks: Mark[]) => ReturnType;
         };
@@ -1802,8 +1787,9 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        katex: {
-            setKatex: (arg?: IKatexAttrs) => ReturnType;
+        tableCellBackground: {
+            setTableCellBackground: (color: string) => ReturnType;
+            unsetTableCellBackground: () => ReturnType;
         };
     }
 }
@@ -1826,8 +1812,13 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        excalidraw: {
-            setExcalidraw: (attrs?: IExcalidrawAttrs) => ReturnType;
+        columns: {
+            insertColumns: (attrs?: {
+                cols: number;
+            }) => ReturnType;
+            addColBefore: () => ReturnType;
+            addColAfter: () => ReturnType;
+            deleteCol: () => ReturnType;
         };
     }
 }
@@ -1835,9 +1826,14 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        tableCellBackground: {
-            setTableCellBackground: (color: string) => ReturnType;
-            unsetTableCellBackground: () => ReturnType;
+        iframe: {
+            /**
+             * Add an iframe
+             */
+            setIframe: (options: {
+                src: string;
+                service: string;
+            }) => ReturnType;
         };
     }
 }
@@ -1857,13 +1853,8 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        columns: {
-            insertColumns: (attrs?: {
-                cols: number;
-            }) => ReturnType;
-            addColBefore: () => ReturnType;
-            addColAfter: () => ReturnType;
-            deleteCol: () => ReturnType;
+        katex: {
+            setKatex: (arg?: IKatexAttrs) => ReturnType;
         };
     }
 }
@@ -1890,9 +1881,8 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        mermaid: {
-            setMermaid: (options: any, replace?: any) => ReturnType;
-            setAlignImageMermaid: (align: 'left' | 'center' | 'right') => ReturnType;
+        excalidraw: {
+            setExcalidraw: (attrs?: IExcalidrawAttrs) => ReturnType;
         };
     }
 }
@@ -1902,6 +1892,16 @@ declare module '@tiptap/core' {
     interface Commands<ReturnType> {
         attachment: {
             setAttachment: (attrs?: unknown) => ReturnType;
+        };
+    }
+}
+
+
+declare module '@tiptap/core' {
+    interface Commands<ReturnType> {
+        mermaid: {
+            setMermaid: (options: any, replace?: any) => ReturnType;
+            setAlignImageMermaid: (align: 'left' | 'center' | 'right') => ReturnType;
         };
     }
 }
@@ -1942,16 +1942,16 @@ declare module '@tiptap/core' {
 }
 
 
+declare namespace DropdownMenuShortcut {
+    var displayName: string;
+}
+
+
 declare namespace DialogHeader {
     var displayName: string;
 }
 
 
 declare namespace DialogFooter {
-    var displayName: string;
-}
-
-
-declare namespace DropdownMenuShortcut {
     var displayName: string;
 }
