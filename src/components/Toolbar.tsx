@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import type { Editor } from '@tiptap/core'
 
 import { Separator } from '@/components'
@@ -23,29 +23,51 @@ interface ToolbarItemProps {
 function Toolbar({ editor, disabled }: ToolbarProps) {
   const { t } = useLocale()
   const { isKeyboardVisible } = useKeyboardVisibility()
-  const itemToolBars = useMemo(() => ['Undo2', 'Redo2', 'Bold', 'Italic', 'Type', 'KatexIcon', 'List', 'ListOrdered', 'Code2', 'Attachment', 'ImageUp', 'Video'], [])
+  const itemToolBars = useMemo(
+    () => [
+      'Undo2',
+      'Redo2',
+      'Bold',
+      'Italic',
+      'Type',
+      'KatexIcon',
+      'List',
+      'ListOrdered',
+      'Code2',
+      'Attachment',
+      'ImageUp',
+      'Video',
+    ],
+    [],
+  )
 
   const items = useMemo(() => {
     const extensions = [...editor.extensionManager.extensions]
     const sortExtensions = extensions.sort((arr, acc) => {
-      const a = (arr.options).sort ?? -1
-      const b = (acc.options).sort ?? -1
+      const a = arr.options.sort ?? -1
+      const b = acc.options.sort ?? -1
       return a - b
     })
 
     let menus: ToolbarItemProps[] = []
 
     for (const extension of sortExtensions) {
-      const { button, divider = false, spacer = false, toolbar = true } = extension.options as any
+      const {
+        button,
+        divider = false,
+        spacer = false,
+        toolbar = true,
+      } = extension.options as any
       if (!button || !isFunction(button) || !toolbar) {
         continue
       }
 
-      const _button: ToolbarItemProps['button'] | ToolbarItemProps['button'][] = button({
-        editor,
-        extension,
-        t,
-      })
+      const _button: ToolbarItemProps['button'] | ToolbarItemProps['button'][]
+        = button({
+          editor,
+          extension,
+          t,
+        })
 
       if (Array.isArray(_button)) {
         const menu: ToolbarItemProps[] = _button.map((k, i) => ({
@@ -62,10 +84,23 @@ function Toolbar({ editor, disabled }: ToolbarProps) {
     return menus
   }, [editor, t])
 
-  const newItems: ToolbarItemProps[] = useMemo(() => items.filter(item => itemToolBars.includes(item.button.componentProps?.icon)), [items, itemToolBars])
+  const newItems: ToolbarItemProps[] = useMemo(
+    () =>
+      items.filter(item =>
+        itemToolBars.includes(item.button.componentProps?.icon),
+      ),
+    [items, itemToolBars],
+  )
+
+  const handleToolbarClick = useCallback((e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+  }, [])
 
   return (
     <div
+      onMouseDown={handleToolbarClick}
+      onClick={handleToolbarClick}
       style={{
         pointerEvents: disabled ? 'none' : 'auto',
         opacity: disabled ? 0.5 : 1,
@@ -81,21 +116,40 @@ function Toolbar({ editor, disabled }: ToolbarProps) {
         alignItems: 'center',
       }}
     >
-      <div className="richtext-flex richtext-gap-x-1">
+      <div
+        onMouseDown={handleToolbarClick}
+        onClick={handleToolbarClick}
+        className="richtext-flex richtext-gap-x-1"
+      >
         {newItems.map((item: ToolbarItemProps, key) => {
           if (itemToolBars.includes(item.button.componentProps?.icon)) {
             const ButtonComponent = item.button.component
 
             return (
-              <div className="richtext-flex richtext-items-center" key={`toolbar-item-${key}`}>
-                {item?.spacer && <Separator orientation="vertical" className="!richtext-h-[16px] !richtext-mx-[10px]" />}
+              <div
+                onClick={handleToolbarClick}
+                onMouseDown={handleToolbarClick}
+                className="richtext-flex richtext-items-center"
+                key={`toolbar-item-${key}`}
+              >
+                {item?.spacer && (
+                  <Separator
+                    orientation="vertical"
+                    className="!richtext-h-[16px] !richtext-mx-[10px]"
+                  />
+                )}
 
                 <ButtonComponent
                   {...item.button.componentProps}
                   disabled={disabled || item?.button?.componentProps?.disabled}
                 />
 
-                {item?.divider && <Separator orientation="vertical" className="!richtext-h-auto !richtext-mx-2" />}
+                {item?.divider && (
+                  <Separator
+                    orientation="vertical"
+                    className="!richtext-h-auto !richtext-mx-2"
+                  />
+                )}
               </div>
             )
           }
