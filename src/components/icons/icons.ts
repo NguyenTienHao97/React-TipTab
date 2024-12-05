@@ -6,6 +6,8 @@ import {
   Bold,
   BookMarked,
   ChevronDown,
+  ChevronLeft,
+  ChevronRight,
   ChevronUp,
   ChevronsUpDown,
   Clipboard,
@@ -205,4 +207,6 @@ export const icons = {
   Twitter,
   FlipX: FlipVertical,
   FlipY: FlipHorizontal,
+  ChevronLeft,
+  ChevronRight,
 } as any

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { NodeViewWrapper } from '@tiptap/react'
@@ -88,9 +89,12 @@ function ImageView(props: any) {
   }
 
   // https://github.com/scrumpy/tiptap/issues/361#issuecomment-540299541
-  function selectImage() {
+  function selectImage(e?: React.MouseEvent) {
     const { editor, getPos } = props
     editor.commands.setNodeSelection(getPos())
+    console.log('selectImage')
+    e?.preventDefault()
+    e?.stopPropagation()
   }
 
   const getMaxSize = useCallback(
