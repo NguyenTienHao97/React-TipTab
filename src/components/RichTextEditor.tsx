@@ -98,6 +98,11 @@ function RichTextEditor(
     extensions: sortExtensions,
     content,
     onUpdate: ({ editor }) => {
+      if ('virtualKeyboard' in navigator) {
+        if (navigator?.virtualKeyboard) {
+          navigator?.virtualKeyboard.hide()
+        }
+      }
       if (onValueChange)
         onValueChange(editor)
     },

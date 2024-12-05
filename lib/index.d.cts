@@ -1714,26 +1714,6 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        imageUpload: {
-            /**
-             * Add an image
-             */
-            setImageInline: (options: Partial<SetImageAttrsOptions>) => ReturnType;
-            /**
-             * Update an image
-             */
-            updateImage: (options: Partial<SetImageAttrsOptions>) => ReturnType;
-            /**
-             * Set image alignment
-             */
-            setAlignImage: (align: 'left' | 'center' | 'right') => ReturnType;
-        };
-    }
-}
-
-
-declare module '@tiptap/core' {
-    interface Commands<ReturnType> {
         fontSize: {
             /**
              * Set the text font size. ex: "12px", "2em", or "small". Must be a valid
@@ -1745,15 +1725,6 @@ declare module '@tiptap/core' {
              * Unset the font size
              */
             unsetFontSize: () => ReturnType;
-        };
-    }
-}
-
-
-declare module '@tiptap/core' {
-    interface Commands<ReturnType> {
-        painter: {
-            setPainter: (marks: Mark[]) => ReturnType;
         };
     }
 }
@@ -1787,6 +1758,26 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
+        imageUpload: {
+            /**
+             * Add an image
+             */
+            setImageInline: (options: Partial<SetImageAttrsOptions>) => ReturnType;
+            /**
+             * Update an image
+             */
+            updateImage: (options: Partial<SetImageAttrsOptions>) => ReturnType;
+            /**
+             * Set image alignment
+             */
+            setAlignImage: (align: 'left' | 'center' | 'right') => ReturnType;
+        };
+    }
+}
+
+
+declare module '@tiptap/core' {
+    interface Commands<ReturnType> {
         tableCellBackground: {
             setTableCellBackground: (color: string) => ReturnType;
             unsetTableCellBackground: () => ReturnType;
@@ -1812,13 +1803,8 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        columns: {
-            insertColumns: (attrs?: {
-                cols: number;
-            }) => ReturnType;
-            addColBefore: () => ReturnType;
-            addColAfter: () => ReturnType;
-            deleteCol: () => ReturnType;
+        excalidraw: {
+            setExcalidraw: (attrs?: IExcalidrawAttrs) => ReturnType;
         };
     }
 }
@@ -1826,14 +1812,8 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        search: {
-            setSearchTerm: (searchTerm: string) => ReturnType;
-            setReplaceTerm: (replaceTerm: string) => ReturnType;
-            replace: () => ReturnType;
-            replaceAll: () => ReturnType;
-            goToPrevSearchResult: () => void;
-            goToNextSearchResult: () => void;
-            setCaseSensitive: (caseSensitive: boolean) => ReturnType;
+        exportWord: {
+            exportToWord: () => ReturnType;
         };
     }
 }
@@ -1841,11 +1821,8 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        emoji: {
-            setEmoji: (emoji: {
-                name: string;
-                emoji: string;
-            }) => ReturnType;
+        painter: {
+            setPainter: (marks: Mark[]) => ReturnType;
         };
     }
 }
@@ -1872,8 +1849,40 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        attachment: {
-            setAttachment: (attrs?: unknown) => ReturnType;
+        emoji: {
+            setEmoji: (emoji: {
+                name: string;
+                emoji: string;
+            }) => ReturnType;
+        };
+    }
+}
+
+
+declare module '@tiptap/core' {
+    interface Commands<ReturnType> {
+        search: {
+            setSearchTerm: (searchTerm: string) => ReturnType;
+            setReplaceTerm: (replaceTerm: string) => ReturnType;
+            replace: () => ReturnType;
+            replaceAll: () => ReturnType;
+            goToPrevSearchResult: () => void;
+            goToNextSearchResult: () => void;
+            setCaseSensitive: (caseSensitive: boolean) => ReturnType;
+        };
+    }
+}
+
+
+declare module '@tiptap/core' {
+    interface Commands<ReturnType> {
+        columns: {
+            insertColumns: (attrs?: {
+                cols: number;
+            }) => ReturnType;
+            addColBefore: () => ReturnType;
+            addColAfter: () => ReturnType;
+            deleteCol: () => ReturnType;
         };
     }
 }
@@ -1901,17 +1910,8 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        exportWord: {
-            exportToWord: () => ReturnType;
-        };
-    }
-}
-
-
-declare module '@tiptap/core' {
-    interface Commands<ReturnType> {
-        excalidraw: {
-            setExcalidraw: (attrs?: IExcalidrawAttrs) => ReturnType;
+        attachment: {
+            setAttachment: (attrs?: unknown) => ReturnType;
         };
     }
 }
