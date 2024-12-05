@@ -75,10 +75,10 @@ const ActionButton = React.forwardRef<HTMLButtonElement, Partial<ActionButtonPro
             // pressed={isActive?.() || false}
             disabled={disabled}
             onClick={(e) => {
-              action?.()
               console.log('action-title', props?.title)
               e.preventDefault()
               e.stopPropagation()
+              action?.()
             }}
             onMouseDown={(e) => {
               e.preventDefault()

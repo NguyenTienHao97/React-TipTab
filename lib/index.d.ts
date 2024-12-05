@@ -1732,16 +1732,6 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        lineHeight: {
-            setLineHeight: (lineHeight: string) => ReturnType;
-            unsetLineHeight: () => ReturnType;
-        };
-    }
-}
-
-
-declare module '@tiptap/core' {
-    interface Commands<ReturnType> {
         indent: {
             /**
              * Set the indent attribute
@@ -1751,6 +1741,16 @@ declare module '@tiptap/core' {
              * Set the outdent attribute
              */
             outdent: () => ReturnType;
+        };
+    }
+}
+
+
+declare module '@tiptap/core' {
+    interface Commands<ReturnType> {
+        lineHeight: {
+            setLineHeight: (lineHeight: string) => ReturnType;
+            unsetLineHeight: () => ReturnType;
         };
     }
 }
@@ -1778,16 +1778,6 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        tableCellBackground: {
-            setTableCellBackground: (color: string) => ReturnType;
-            unsetTableCellBackground: () => ReturnType;
-        };
-    }
-}
-
-
-declare module '@tiptap/core' {
-    interface Commands<ReturnType> {
         columns: {
             insertColumns: (attrs?: {
                 cols: number;
@@ -1795,15 +1785,6 @@ declare module '@tiptap/core' {
             addColBefore: () => ReturnType;
             addColAfter: () => ReturnType;
             deleteCol: () => ReturnType;
-        };
-    }
-}
-
-
-declare module '@tiptap/core' {
-    interface Commands<ReturnType> {
-        exportWord: {
-            exportToWord: () => ReturnType;
         };
     }
 }
@@ -1820,6 +1801,21 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
+        iframe: {
+            /**
+             * Add an iframe
+             */
+            setIframe: (options: {
+                src: string;
+                service: string;
+            }) => ReturnType;
+        };
+    }
+}
+
+
+declare module '@tiptap/core' {
+    interface Commands<ReturnType> {
         search: {
             setSearchTerm: (searchTerm: string) => ReturnType;
             setReplaceTerm: (replaceTerm: string) => ReturnType;
@@ -1828,6 +1824,16 @@ declare module '@tiptap/core' {
             goToPrevSearchResult: () => void;
             goToNextSearchResult: () => void;
             setCaseSensitive: (caseSensitive: boolean) => ReturnType;
+        };
+    }
+}
+
+
+declare module '@tiptap/core' {
+    interface Commands<ReturnType> {
+        tableCellBackground: {
+            setTableCellBackground: (color: string) => ReturnType;
+            unsetTableCellBackground: () => ReturnType;
         };
     }
 }
@@ -1856,6 +1862,15 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
+        exportWord: {
+            exportToWord: () => ReturnType;
+        };
+    }
+}
+
+
+declare module '@tiptap/core' {
+    interface Commands<ReturnType> {
         tableOfContents: {
             setTableOfContents: () => ReturnType;
             removeTableOfContents: () => ReturnType;
@@ -1868,51 +1883,6 @@ declare module '@tiptap/core' {
     interface Commands<ReturnType> {
         excalidraw: {
             setExcalidraw: (attrs?: IExcalidrawAttrs) => ReturnType;
-        };
-    }
-}
-
-
-declare module '@tiptap/core' {
-    interface Commands<ReturnType> {
-        iframe: {
-            /**
-             * Add an iframe
-             */
-            setIframe: (options: {
-                src: string;
-                service: string;
-            }) => ReturnType;
-        };
-    }
-}
-
-
-declare module '@tiptap/core' {
-    interface Commands<ReturnType> {
-        imageGifUpload: {
-            /**
-             * Add an image gif
-             */
-            setImageGif: (options: Partial<SetImageAttrsOptions>) => ReturnType;
-            /**
-             * Update an image gif
-             */
-            updateImageGif: (options: Partial<SetImageAttrsOptions>) => ReturnType;
-            /**
-             * Set image alignment
-             */
-            setAlignImageGif: (align: 'left' | 'center' | 'right') => ReturnType;
-        };
-    }
-}
-
-
-declare module '@tiptap/core' {
-    interface Commands<ReturnType> {
-        mermaid: {
-            setMermaid: (options: any, replace?: any) => ReturnType;
-            setAlignImageMermaid: (align: 'left' | 'center' | 'right') => ReturnType;
         };
     }
 }
@@ -1942,8 +1912,33 @@ declare module '@tiptap/core' {
 }
 
 
-declare namespace DropdownMenuShortcut {
-    var displayName: string;
+declare module '@tiptap/core' {
+    interface Commands<ReturnType> {
+        mermaid: {
+            setMermaid: (options: any, replace?: any) => ReturnType;
+            setAlignImageMermaid: (align: 'left' | 'center' | 'right') => ReturnType;
+        };
+    }
+}
+
+
+declare module '@tiptap/core' {
+    interface Commands<ReturnType> {
+        imageGifUpload: {
+            /**
+             * Add an image gif
+             */
+            setImageGif: (options: Partial<SetImageAttrsOptions>) => ReturnType;
+            /**
+             * Update an image gif
+             */
+            updateImageGif: (options: Partial<SetImageAttrsOptions>) => ReturnType;
+            /**
+             * Set image alignment
+             */
+            setAlignImageGif: (align: 'left' | 'center' | 'right') => ReturnType;
+        };
+    }
 }
 
 
@@ -1953,5 +1948,10 @@ declare namespace DialogHeader {
 
 
 declare namespace DialogFooter {
+    var displayName: string;
+}
+
+
+declare namespace DropdownMenuShortcut {
     var displayName: string;
 }
