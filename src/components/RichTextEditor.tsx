@@ -99,12 +99,6 @@ function RichTextEditor(
     extensions: sortExtensions,
     content,
     onUpdate: ({ editor }) => {
-      console.log('edtiorxxxx', editor)
-      if ('virtualKeyboard' in navigator) {
-        if (navigator?.virtualKeyboard) {
-          navigator?.virtualKeyboard.show()
-        }
-      }
       if (onValueChange)
         onValueChange(editor)
     },

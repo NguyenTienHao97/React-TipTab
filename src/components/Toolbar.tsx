@@ -92,9 +92,9 @@ function Toolbar({ editor, disabled }: ToolbarProps) {
     [items, itemToolBars],
   )
 
-  const handleToolbarClick = useCallback((e: React.MouseEvent) => {
-    e.preventDefault()
-    e.stopPropagation()
+  const handleToolbarClick = useCallback(() => {
+    // e.preventDefault()
+    // e.stopPropagation()
   }, [])
 
   return (

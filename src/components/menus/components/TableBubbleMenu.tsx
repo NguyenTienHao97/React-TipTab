@@ -94,7 +94,7 @@ function TableBubbleMenu({ editor, disabled }: TableBubbleMenuProps) {
         sticky: 'popper',
         placement: 'auto',
         offset: [-2, 16],
-        zIndex: 5550,
+        // zIndex: 5550,
         appendTo: 'parent',
       }}
     >
