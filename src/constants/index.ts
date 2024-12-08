@@ -18,11 +18,11 @@ export const IMAGE_MAX_SIZE = 100_000 as const
 export const IMAGE_THROTTLE_WAIT_TIME = 16 as const
 
 /** Default number of rows and columns for grids when creating a table */
-export const TABLE_INIT_GRID_SIZE = 10 as const
+export const TABLE_INIT_GRID_SIZE = 20 as const
 /** Maximum number of rows and columns for grids when creating a table */
-export const TABLE_MAX_GRID_SIZE = 10 as const
+export const TABLE_MAX_GRID_SIZE = 20 as const
 /** Minimum number of rows and columns for grids when creating a table */
-export const TABLE_DEFAULT_SELECTED_GRID_SIZE = 2 as const
+export const TABLE_DEFAULT_SELECTED_GRID_SIZE = 3 as const
 
 export const DEFAULT_COLOR = '#262626'
 /** Default color list for text color and text highlight */
@@ -124,6 +124,8 @@ export const DEFAULT_LANGUAGE_CODE_BLOCK = [
   'js',
   'ts',
   'bash',
+  'sql',
+  'python',
 ]
 
 export const MAP_LANGUAGE_CODE_LABELS = {
@@ -132,6 +134,8 @@ export const MAP_LANGUAGE_CODE_LABELS = {
   js: 'JavaScript',
   ts: 'TypeScript',
   bash: 'Bash',
+  python: 'Python',
+  sql: 'SQL',
 } as any
 
 /** Default font size list */
@@ -164,8 +168,8 @@ export enum IMAGE_SIZE {
 
 /** Options for setting video size in the bubble menu */
 export enum VIDEO_SIZE {
-  'size-small' = 480,
-  'size-medium' = 640,
+  'size-small' = 320,
+  'size-medium' = 480,
   'size-large' = '100%',
 }
 
@@ -200,6 +204,7 @@ export const NODE_TYPE_MENU: any = {
     'code',
     'link',
     'divider',
+    'indent',
     'color',
     'highlight',
     'textAlign',
@@ -218,6 +223,7 @@ export const BUBBLE_TEXT_LIST = [
   'link',
   'divider',
   'color',
+  'indent',
   'highlight',
   'textAlign',
 ]

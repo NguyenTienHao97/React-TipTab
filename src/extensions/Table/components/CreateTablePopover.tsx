@@ -104,7 +104,7 @@ function CreateTablePopover(props: IPropsCreateTablePopover) {
                         onMouseOver={() => selectTableGridSize(row, col)}
                         onMouseDown={() => onMouseDown(row, col)}
                       >
-                        <div className="richtext-w-4 richtext-h-4 richtext-p-1 !richtext-border richtext-rounded-[2px] richtext-box-border richtext-border-solid !richtext-border-border"></div>
+                        <div className="richtext-w-9 richtext-h-5 richtext-p-1 !richtext-border richtext-rounded-[2px] richtext-box-border richtext-border-solid !richtext-border-border"></div>
                       </div>
                     )
                   })}

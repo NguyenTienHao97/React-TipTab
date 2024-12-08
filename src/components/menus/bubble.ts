@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { deleteSelection } from '@tiptap/pm/commands'
 import type { Editor } from '@tiptap/react'
 
@@ -334,7 +335,10 @@ export function getBubbleText(editor: Editor, t: any) {
       }]
     }
 
-    const ext = editor.extensionManager.extensions.find(ext => ext.name === type)
+    const ext = editor.extensionManager.extensions.find((ext) => {
+      console.log('ext.name', ext.name)
+      return ext.name === type
+    })
     if (ext) {
       return [...acc, ext.configure().options.button({ editor, t, extension: ext })]
     }

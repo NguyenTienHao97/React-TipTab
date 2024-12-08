@@ -85,16 +85,14 @@ function TableBubbleMenu({ editor, disabled }: TableBubbleMenuProps) {
       shouldShow={shouldShow}
       updateDelay={0}
       tippyOptions={{
-        // offset: [0, 8],
         popperOptions: {
           modifiers: [{ name: 'flip', enabled: false }],
         },
         getReferenceClientRect,
         plugins: [sticky],
         sticky: 'popper',
-        placement: 'auto',
+        placement: 'bottom-start',
         offset: [-2, 16],
-        // zIndex: 5550,
         appendTo: 'parent',
       }}
     >
@@ -102,7 +100,7 @@ function TableBubbleMenu({ editor, disabled }: TableBubbleMenuProps) {
         disabled
           ? <></>
           : (
-              <div style={{ width: 300, overflowX: 'auto' }} className="richtext-flex richtext-flex-row richtext-h-full richtext-items-center richtext-leading-none richtext-gap-0.5 richtext-p-2 richtext-bg-background richtext-rounded-lg richtext-shadow-sm !richtext-border richtext-border-border">
+              <div style={{ width: 320, overflowX: 'auto' }} className="richtext-flex richtext-flex-row richtext-h-full richtext-items-center richtext-leading-none richtext-gap-0.5 richtext-p-2 richtext-bg-background richtext-rounded-lg richtext-shadow-sm !richtext-border richtext-border-border">
                 <ActionButton
                   icon="BetweenHorizonalEnd"
                   tooltip={t('editor.table.menu.insertColumnBefore')}

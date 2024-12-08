@@ -102,7 +102,7 @@ function BubbleMenuText(props: BubbleMenuTextProps) {
             <div
               ref={scrollContainerRef}
               style={{
-                width: 300,
+                width: 360,
                 overflowX: 'auto',
                 display: 'flex',
                 flexDirection: 'row',

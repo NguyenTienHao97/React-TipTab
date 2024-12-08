@@ -3,15 +3,21 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { HelpCircle } from 'lucide-react'
 import katex from 'katex'
-import { ActionButton, Button, Label, Popover, PopoverContent, PopoverTrigger } from '@/components'
+import {
+  ActionButton,
+  Button,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components'
 import { Textarea } from '@/components/ui/textarea'
 import type { IKatexAttrs } from '@/extensions/Katex/Katex'
 import { Katex } from '@/extensions/Katex/Katex'
 import { useAttributes } from '@/hooks/useAttributes'
-import { useLocale } from '@/locales'
+// import { useLocale } from '@/locales'
 
 function KatexActiveButton({ editor, ...props }: any) {
-  const { t } = useLocale()
+  // const { t } = useLocale()
 
   const attrs = useAttributes<IKatexAttrs>(editor, Katex.name, {
     text: '',
@@ -28,7 +34,11 @@ function KatexActiveButton({ editor, ...props }: any) {
 
   useEffect(() => {
     if (defaultShowPicker) {
-      editor.chain().updateAttributes(Katex.name, { defaultShowPicker: false }).focus().run()
+      editor
+        .chain()
+        .updateAttributes(Katex.name, { defaultShowPicker: false })
+        .focus()
+        .run()
     }
   }, [editor, defaultShowPicker])
 
@@ -41,59 +51,76 @@ function KatexActiveButton({ editor, ...props }: any) {
     }
   }, [currentValue])
 
-  const previewContent = useMemo(
-    () => {
-      if (`${currentValue}`.trim()) {
-        return (
-          <span contentEditable={false} dangerouslySetInnerHTML={{ __html: formatText || '' }}></span>
-        )
-      }
+  const previewContent = useMemo(() => {
+    if (`${currentValue}`.trim()) {
+      return (
+        <span
+          contentEditable={false}
+          dangerouslySetInnerHTML={{ __html: formatText || '' }}
+        >
+        </span>
+      )
+    }
 
-      return null
-    },
-    [currentValue, formatText],
-  )
+    return null
+  }, [currentValue, formatText])
 
   return (
     <Popover modal>
       <PopoverTrigger asChild>
-        <ActionButton
-          tooltip={props?.tooltip}
-          icon={props?.icon}
-        />
+        <ActionButton tooltip={props?.tooltip} icon={props?.icon} />
       </PopoverTrigger>
 
-      <PopoverContent hideWhenDetached className="richtext-w-full richtext-h-full richtext-p-2" align="start" side="bottom">
-        <Label className="richtext-mb-[6px]">
+      <PopoverContent
+        hideWhenDetached
+        className="richtext-w-full richtext-h-full richtext-p-1"
+        align="start"
+        side="bottom"
+      >
+        {/* <Label className="richtext-mb-[2px]">
           {t('editor.formula.dialog.text')}
-        </Label>
-        <div className="richtext-flex richtext-w-full richtext-max-w-sm richtext-items-center richtext-gap-1.5 richtext-mb-[16px]">
+        </Label> */}
+        <div
+          style={{
+            height: 60,
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+          }}
+          className="richtext-flex richtext-w-full richtext-max-w-sm richtext-items-center richtext-gap-1.5"
+        >
           <div className="richtext-relative richtext-w-full richtext-max-w-sm">
             <Textarea
               value={currentValue}
               onChange={e => setCurrentValue(e.target.value)}
               autoFocus
               required
-              rows={3}
+              rows={2}
               defaultValue={text}
               className="richtext-w-full"
               placeholder="Text"
             />
           </div>
+          <div className="richtext-flex richtext-items-center richtext-justify-between richtext-gap-[6px]">
+            <Button onClick={submit} className="richtext-flex-1">
+              Submit
+            </Button>
+
+            <a
+              href="https://katex.org/docs/supported"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              <HelpCircle size={16} />
+            </a>
+          </div>
         </div>
 
         {previewContent && (
-          <div className="richtext-my-[10px] richtext-p-[10px] richtext-rounded-[6px] !richtext-border-[1px] richtext-max-w-[286px] richtext-whitespace-nowrap richtext-overflow-auto">
+          <div className="richtext-my-[3px] richtext-p-[10px] richtext-rounded-[6px] !richtext-border-[1px] richtext-max-w-[286px] richtext-whitespace-nowrap richtext-overflow-auto">
             {previewContent}
           </div>
         )}
-        <div className="richtext-flex richtext-items-center richtext-justify-between richtext-gap-[6px]">
-          <Button onClick={submit} className="richtext-flex-1">Submit</Button>
-
-          <a href="https://katex.org/docs/supported" target="_blank" rel="noreferrer noopener">
-            <HelpCircle size={16} />
-          </a>
-        </div>
       </PopoverContent>
     </Popover>
   )

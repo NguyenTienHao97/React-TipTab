@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import TiptapTable from '@tiptap/extension-table'
 import { TableCell } from '@tiptap/extension-table-cell'
 import type { TableCellOptions } from '@tiptap/extension-table-cell'
@@ -34,6 +35,7 @@ export const Table = TiptapTable.extend<TableOptions>({
       resizable: true,
       lastColumnResizable: true,
       allowTableNodeSelection: false,
+      cellMinWidth: 100,
       button: ({ editor, t }: any) => ({
         component: TableActionButton,
         componentProps: {
@@ -47,10 +49,13 @@ export const Table = TiptapTable.extend<TableOptions>({
   },
 
   addExtensions() {
+    console.log('this.options.tableCell', this.options.tableCell)
     return [
       TableRow.configure(this.options.tableRow),
       TableHeader.configure(this.options.tableHeader),
-      TableCell.configure(this.options.tableCell),
+      TableCell.configure({
+        ...this.options.tableCell,
+      }),
       TableCellBackground.configure(this.options.tableCellBackground),
     ]
   },

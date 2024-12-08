@@ -32,7 +32,11 @@ function BubbleMenuKatex({ editor, ...props }: any) {
   useEffect(() => {
     if (defaultShowPicker) {
       toggleVisible(true)
-      editor.chain().updateAttributes(Katex.name, { defaultShowPicker: false }).focus().run()
+      editor
+        .chain()
+        .updateAttributes(Katex.name, { defaultShowPicker: false })
+        .focus()
+        .run()
     }
   }, [editor, defaultShowPicker, toggleVisible])
 
@@ -50,18 +54,19 @@ function BubbleMenuKatex({ editor, ...props }: any) {
     }
   }, [currentValue])
 
-  const previewContent = useMemo(
-    () => {
-      if (`${currentValue}`.trim()) {
-        return (
-          <span contentEditable={false} dangerouslySetInnerHTML={{ __html: formatText || '' }}></span>
-        )
-      }
+  const previewContent = useMemo(() => {
+    if (`${currentValue}`.trim()) {
+      return (
+        <span
+          contentEditable={false}
+          dangerouslySetInnerHTML={{ __html: formatText || '' }}
+        >
+        </span>
+      )
+    }
 
-      return null
-    },
-    [currentValue, formatText],
-  )
+    return null
+  }, [currentValue, formatText])
 
   return (
     <BubbleMenu
@@ -85,7 +90,10 @@ function BubbleMenuKatex({ editor, ...props }: any) {
             <></>
           )
         : (
-            <div className="richtext-p-2 richtext-bg-white !richtext-border richtext-rounded-lg richtext-shadow-sm dark:richtext-bg-black richtext-border-neutral-200 dark:richtext-border-neutral-800">
+            <div
+              style={{ marginTop: 200 }}
+              className="richtext-p-2 richtext-bg-white !richtext-border richtext-rounded-lg richtext-shadow-sm dark:richtext-bg-black richtext-border-neutral-200 dark:richtext-border-neutral-800"
+            >
               {visible
                 ? (
                     <>
@@ -106,9 +114,15 @@ function BubbleMenuKatex({ editor, ...props }: any) {
                       )}
 
                       <div className="richtext-flex richtext-items-center richtext-justify-between richtext-gap-[6px]">
-                        <Button onClick={submit} className="richtext-flex-1">Submit</Button>
+                        <Button onClick={submit} className="richtext-flex-1">
+                          Submit
+                        </Button>
 
-                        <a href="https://katex.org/docs/supported" target="_blank" rel="noreferrer noopener">
+                        <a
+                          href="https://katex.org/docs/supported"
+                          target="_blank"
+                          rel="noreferrer noopener"
+                        >
                           <HelpCircle size={16} />
                         </a>
                       </div>
@@ -116,7 +130,10 @@ function BubbleMenuKatex({ editor, ...props }: any) {
                   )
                 : (
                     <div className="richtext-flex richtext-items-center richtext-justify-center richtext-gap-[6px]">
-                      <ActionButton tooltip="Edit" action={() => toggleVisible(!visible)}>
+                      <ActionButton
+                        tooltip="Edit"
+                        action={() => toggleVisible(!visible)}
+                      >
                         <Pencil size={16} />
                       </ActionButton>
 
@@ -127,7 +144,6 @@ function BubbleMenuKatex({ editor, ...props }: any) {
                   )}
             </div>
           )}
-
     </BubbleMenu>
   )
 }
