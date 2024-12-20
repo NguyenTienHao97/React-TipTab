@@ -126,6 +126,15 @@ export const DEFAULT_LANGUAGE_CODE_BLOCK = [
   'bash',
   'sql',
   'python',
+  'dax',
+  'bash',
+  'csv',
+  'tsv',
+  'json',
+  'xml',
+  'yaml',
+  'mdx',
+  'nginx',
 ]
 
 export const MAP_LANGUAGE_CODE_LABELS = {
@@ -136,6 +145,14 @@ export const MAP_LANGUAGE_CODE_LABELS = {
   bash: 'Bash',
   python: 'Python',
   sql: 'SQL',
+  dax: 'Dax',
+  csv: 'Csv',
+  tsv: 'Tsv',
+  json: 'Json',
+  xml: 'Xml',
+  yaml: 'Yaml',
+  mdx: 'Mdx',
+  nginx: 'Nginx',
 } as any
 
 /** Default font size list */
