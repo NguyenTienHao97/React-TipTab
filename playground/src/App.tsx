@@ -152,25 +152,6 @@ function App() {
   )
 
   useEffect(() => {
-    // eslint-disable-next-line no-console
-    console.log('data2222', window?.initialData)
-    window.receiveMessageFromReactNative = (data: string) => {
-      // eslint-disable-next-line no-console
-      console.log('data', data)
-      if (data) {
-        setContent(data)
-      }
-    }
-
-    if (window?.ReactNativeWebView?.injectedObjectJson()) {
-      // eslint-disable-next-line ts/no-unused-expressions
-      const data: any = JSON.parse(window?.ReactNativeWebView?.injectedObjectJson())
-      // eslint-disable-next-line no-console
-      console.log('data-init', data?.initialData)
-    }
-  }, [])
-
-  useEffect(() => {
     locale.setLang('vi')
   }, [])
 
