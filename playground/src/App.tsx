@@ -161,6 +161,13 @@ function App() {
         setContent(data)
       }
     }
+
+    if (window?.ReactNativeWebView?.injectedObjectJson()) {
+      // eslint-disable-next-line ts/no-unused-expressions
+      const data: any = JSON.parse(window?.ReactNativeWebView?.injectedObjectJson())
+      // eslint-disable-next-line no-console
+      console.log('data-init', data?.initialData)
+    }
   }, [])
 
   useEffect(() => {
