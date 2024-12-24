@@ -151,7 +151,9 @@ function App() {
     [debounce],
   )
 
-  useLayoutEffect(() => {
+  useEffect(() => {
+    // eslint-disable-next-line no-console
+    console.log('data2222')
     window.receiveMessageFromReactNative = (data: string) => {
       // eslint-disable-next-line no-console
       console.log('data', data)
