@@ -5,6 +5,7 @@ declare global {
       // eslint-disable-next-line ts/method-signature-style
       postMessage(message: string): void
     }
+    receiveMessageFromReactNative?: (data: string) => void
   }
 }
 export {}

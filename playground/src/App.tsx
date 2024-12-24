@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useState } from 'react'
 
 import RichTextEditor, {
   Attachment,
@@ -138,7 +138,7 @@ function debounce(func: any, wait: number) {
 }
 
 function App() {
-  const [content, setContent] = useState(DEFAULT)
+  const [content, setContent] = useState<string>(DEFAULT)
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const onValueChange = useCallback(
@@ -150,6 +150,16 @@ function App() {
     }, 300),
     [debounce],
   )
+
+  useLayoutEffect(() => {
+    window.receiveMessageFromReactNative = (data: string) => {
+      // eslint-disable-next-line no-console
+      console.log('data', data)
+      if (data) {
+        setContent(data)
+      }
+    }
+  }, [])
 
   useEffect(() => {
     locale.setLang('vi')
