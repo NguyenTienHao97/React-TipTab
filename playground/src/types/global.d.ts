@@ -8,6 +8,7 @@ declare global {
       injectedObjectJson(): any
     }
     receiveMessageFromReactNative?: (data: string) => void
+    initialData: any
   }
 }
 export {}

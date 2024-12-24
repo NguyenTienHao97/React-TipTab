@@ -153,7 +153,7 @@ function App() {
 
   useEffect(() => {
     // eslint-disable-next-line no-console
-    console.log('data2222')
+    console.log('data2222', window?.initialData)
     window.receiveMessageFromReactNative = (data: string) => {
       // eslint-disable-next-line no-console
       console.log('data', data)
