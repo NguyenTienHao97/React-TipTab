@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useLayoutEffect, useState } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useMemo, useState } from 'react'
 
 import RichTextEditor, {
   Attachment,
@@ -139,6 +139,16 @@ function debounce(func: any, wait: number) {
 
 function App() {
   const [content, setContent] = useState<string>(DEFAULT)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const queryParams = new URLSearchParams(window?.location?.search)
+
+  const initData = useMemo(() => queryParams.get('initialData'), [queryParams])
+
+  useEffect(() => {
+    if (initData) {
+      setContent(initData)
+    }
+  }, [initData])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const onValueChange = useCallback(
