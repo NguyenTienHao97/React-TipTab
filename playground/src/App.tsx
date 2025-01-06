@@ -1,4 +1,10 @@
-import { useCallback, useEffect, useLayoutEffect, useMemo, useState } from 'react'
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useState,
+} from 'react'
 
 import RichTextEditor, {
   Attachment,
@@ -126,8 +132,6 @@ const extensions = [
   }),
 ]
 
-const DEFAULT = ``
-
 function debounce(func: any, wait: number) {
   let timeout: NodeJS.Timeout
   return function (...args: any[]) {
@@ -138,24 +142,22 @@ function debounce(func: any, wait: number) {
 }
 
 function App() {
-  const [content, setContent] = useState<string>(DEFAULT)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const queryParams = new URLSearchParams(window?.location?.search)
 
   const initData = useMemo(() => queryParams.get('initialData'), [queryParams])
-
-  useEffect(() => {
-    if (initData) {
-      setContent(initData)
-    }
-  }, [initData])
+  const [content, setContent] = useState<string>('')
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const onValueChange = useCallback(
     debounce((value: any) => {
-      setContent(value)
-      if (window?.ReactNativeWebView) {
-        window?.ReactNativeWebView.postMessage(JSON.stringify({ data: value }))
+      if (value !== '<p dir="auto"></p>') {
+        setContent(value)
+        if (window?.ReactNativeWebView) {
+          window?.ReactNativeWebView.postMessage(
+            JSON.stringify({ data: value }),
+          )
+        }
       }
     }, 300),
     [debounce],
@@ -169,7 +171,8 @@ function App() {
     <div style={{ background: '#E1ECFE', height: '100vh' }}>
       <RichTextEditor
         output="html"
-        content={content as any}
+        removeDefaultWrapper
+        content={content === '' ? initData : content as any}
         onChangeContent={onValueChange}
         extensions={extensions}
         bubbleMenu={{

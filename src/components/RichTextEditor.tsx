@@ -166,8 +166,6 @@ function RichTextEditor(
     }
   }, [])
 
-  // const hasExtensionValue = hasExtension(editor as any, 'characterCount')
-
   if (!editor) {
     return <></>
   }
@@ -178,6 +176,7 @@ function RichTextEditor(
         <div className="richtext-overflow-hidden">
           <div className="richtext-flex richtext-flex-col richtext-max-h-full">
             <EditorContent
+              content={content}
               className={`richtext-relative ${props?.contentClass || ''}`}
               editor={editor}
             />
