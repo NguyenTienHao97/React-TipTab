@@ -168,7 +168,7 @@ function App() {
   }, [])
 
   return (
-    <div style={{ background: '#E1ECFE', height: '100vh' }}>
+    <div style={{ background: 'white', height: '100vh' }}>
       <RichTextEditor
         output="html"
         removeDefaultWrapper
